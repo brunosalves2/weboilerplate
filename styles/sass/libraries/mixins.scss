@@ -1,0 +1,68 @@
+@mixin prefixit($attribute, $value) {
+	#{'-' + webkit + '-' + $attribute}: $value;
+	#{'-' + moz + '-' + $attribute}: $value;
+	#{'-' + ms + '-' + $attribute}: $value;
+	#{'-' + o + '-' + $attribute}: $value;
+	$attribute: $value;
+}
+
+@mixin transition($type:all, $time:.3s, $mode: ease) {
+	@include prefixit(transition, $type $time $mode);
+}
+
+@mixin opacity($opacity: 0, $filter: 0) {
+	@include prefixit(opacity, $opacity);
+	filter:alpha(opacity=$filter);
+}
+
+@mixin transform($transform) {
+	@include prefixit(transform, $transform);
+}
+
+@mixin placeholder($color) {
+	&::-webkit-input-placeholder { color: $color }
+	&:-moz-placeholder { color: $color }
+	&::-moz-placeholder { color: $color }
+	&:-ms-input-placeholder { color: $color }
+	&::-ms-input-placeholder { color: $color }
+	&:placeholder-shown { color: $color }
+}
+
+@mixin centerAlign($direction:'xy') {
+	@include centerAlign($direction, null);
+}
+
+@mixin centerAlign($direction:'xy', $position: relative) {
+	@if $direction == 'x' {
+		position: $position;
+		top: 0;
+		left: 50%;
+		@include transform(translateX(-50%));
+	} @else if $direction == 'y' {
+		position: $position;
+		top: 50%;
+		left: 0;
+		@include transform(translateY(-50%));
+	} @else if $direction == 'xy' {
+		position: $position;
+		top: 50%;
+		left: 50%;
+		@include transform(translateX(-50%) translateY(-50%));
+	}
+}
+
+@mixin pseudoPrefix($display: block) {
+	display: $display;
+	content: ".";
+	font-size: 0;
+}
+
+@mixin clearfix() {
+	&:after {
+		display: block;
+		content: '.';
+		font-size: 0;
+		clear: both;
+		zoom: 1;
+	}
+}
