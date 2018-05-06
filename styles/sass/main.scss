@@ -1,2 +1,14 @@
-@import 'libraries/mixins';
+// SASS and CSS libraries
 @import 'libraries/normalizer';
+@import 'libraries/jquery.dataTables';
+@import 'libraries/bootstrap';
+
+// SASS modules
+@import 'config';
+@import 'mixins';
+@import 'fonts';
+
+// Styles
+body {
+  font-family: 'Montserrat-Regular';
+}
